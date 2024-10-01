@@ -66,7 +66,7 @@ export default function Search() {
   const showSearchResults = searchValue.length > 0 && !!searchResults && !isSearchPage;
 
   return (
-    <form onSubmit={onSubmit} className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
+    <form onSubmit={onSubmit} className="max-w-[550px] relative w-full lg:w-[300px] md:w-[350px] xl:w-[350px]">
       <input
         type="text"
         name="search"
@@ -75,31 +75,31 @@ export default function Search() {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         defaultValue={searchParams?.get('q') || ''}
-        className="w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
+        className="w-full border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 max-w-[450px] "
       />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
         <MagnifyingGlassIcon className="h-4" />
       </div>
       {
         showSearchResults && (
-          <ul ref={searchResultsRef} className='nextra-scrollbar border border-gray-200 bg-white text-gray-100 dark:border-neutral-800 dark:bg-neutral-900 absolute top-full z-20 mt-2 overflow-auto overscroll-contain rounded-xl py-2.5 shadow-xl max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] inset-x-0 ltr:md:left-auto rtl:md:right-auto contrast-more:border contrast-more:border-gray-900 contrast-more:dark:border-gray-50 w-full min-h-[100px]'>
+          <ul ref={searchResultsRef} className='nextra-scrollbar border border-gray-200 bg-white text-gray-100  absolute top-full z-20 mt-2 overflow-auto overscroll-contain rounded-xl py-2.5 shadow-xl max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] inset-x-0 ltr:md:left-auto rtl:md:right-auto contrast-more:border contrast-more:border-gray-900 contrast-more: w-full min-h-[100px]'>
             {
               searchResults.count
                 ? (
                   searchResults?.hits?.map((product) => (
-                    <li key={product.id} className='mx-2.5 break-words rounded-md contrast-more:border text-gray-800 contrast-more:border-transparent dark:text-gray-300'>
+                    <li key={product.id} className='mx-2.5 break-words rounded-md contrast-more:border text-gray-800 contrast-more:border-transparent '>
                       <Link href={`/product/${product.document.handle}`} className='block scroll-m-12 px-2.5 py-2 rounded-md hover:bg-blue-600 hover:bg-opacity-10 hover:text-blue-500'>
                         <div className='text-base font-semibold leading-5'>
                           {product.document.title as string}
                         </div>
-                        <div className='excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 dark:text-gray-400 contrast-more:dark:text-gray-50'>
+                        <div className='excerpt mt-1 text-sm leading-[1.35rem] text-gray-600 '>
                           {trimDescription((product.document.description || product.document.title) as string)}
                         </div>
                       </Link>
                     </li>
                   ))
                 ) : (
-                  <li className='mx-2.5 break-words rounded-md contrast-more:border text-gray-800 contrast-more:border-transparent dark:text-gray-300'>
+                  <li className='mx-2.5 break-words rounded-md contrast-more:border text-gray-800 contrast-more:border-transparent'>
                     <div className='block scroll-m-12 px-2.5 py-2 rounded-md'>
                       <div className='text-base font-semibold leading-5'>
                         No results found for &quot;{searchValue}&quot;
